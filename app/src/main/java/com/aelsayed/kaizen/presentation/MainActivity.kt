@@ -21,26 +21,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
 
-            repeatOnLifecycle(Lifecycle.State.STARTED)
-            {
-                viewModel.state.collect {
-
-                    setContent {
-                        KaizenSportTheme {
-                            Column {
-                                HomeScreen(viewModel)
-                            }
-                        }
-                    }
-
+        setContent {
+            KaizenSportTheme {
+                Column {
+                    HomeScreen(viewModel)
                 }
-
-
             }
+        }
 
 
         }
-    }
 }
