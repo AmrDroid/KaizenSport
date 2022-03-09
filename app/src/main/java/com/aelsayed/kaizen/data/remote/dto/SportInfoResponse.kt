@@ -2,11 +2,11 @@ package com.aelsayed.kaizen.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class SportInfo(
+data class SportInfoResponse(
     @SerializedName("d")
     val category: String,
     @SerializedName("e")
-    val events: List<MatchEvent>,
+    val eventResponses: List<MatchEventResponse>,
     @SerializedName("i")
     val sportInfoId: String
 )

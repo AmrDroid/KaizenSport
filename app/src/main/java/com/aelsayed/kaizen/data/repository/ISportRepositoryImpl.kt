@@ -6,8 +6,8 @@ import com.aelsayed.kaizen.data.remote.RemoteDataSource
 import com.aelsayed.kaizen.domain.model.Category
 import com.aelsayed.kaizen.domain.model.MatchEvent
 import com.aelsayed.kaizen.domain.repository.ISportRepository
-import com.aelsayed.kaizen.presentation.CategoryMapper
-import com.aelsayed.kaizen.util.mappers.MatchEventMapper
+import com.aelsayed.kaizen.util.CategoryMapper
+import com.aelsayed.kaizen.util.MatchEventMapper
 import java.lang.Exception
 
 class ISportRepositoryImpl constructor(
@@ -17,27 +17,31 @@ class ISportRepositoryImpl constructor(
 
 
     override suspend fun getCategories(): List<Category> {
-
         try {
+
             val categories = localDataSource.getAllCategories()
-                .map { CategoryMapper.entityToModel(it) }
+                .map { CategoryMapper.entityToModel(it) } //Checking if the data are in room database
 
-            if (categories.isNullOrEmpty()) {
+            if (categories.isNullOrEmpty()) { //Data are not in room database
 
-                val response = remoteDataSource.getMatchesInfo()
+                val response = remoteDataSource.getMatchesInfo() //Getting data from api
                 if (response.isNullOrEmpty()) {
                     throw Exception("Error fetching data from API.")
                 } else {
-                    localDataSource.deleteAllCategories()
+
+                    localDataSource.deleteAllCategories() //Cleaning room database
                     response.forEach {
                         val category = CategoryMapper.dtoToEntity(it)
-                        localDataSource.insertSportCategory(category)
+                        localDataSource.insertSportCategory(category) //Adding each category to room database
                     }
 
                     return localDataSource.getAllCategories()
-                        .map { CategoryMapper.entityToModel(it) }
+                        .map { CategoryMapper.entityToModel(it) } //Getting categories from database
+
+
                 }
-            } else {
+
+            } else { //Data not in room database
                 return categories
             }
 
@@ -64,7 +68,7 @@ class ISportRepositoryImpl constructor(
                     //For every category, add all matches to our database
                     localDataSource.deleteAllMatchEvents()
                     response.forEach {
-                        val match = it.events
+                        val match = it.eventResponses
 
                         match.forEach { m ->
                             localDataSource.addMatchEvent(MatchEventMapper.dtoToEntity(m))

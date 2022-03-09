@@ -2,7 +2,7 @@ package com.aelsayed.kaizen.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class MatchEvent(
+data class MatchEventResponse(
 
     @SerializedName("d")
     val eventName: String,
