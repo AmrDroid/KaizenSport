@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">KaizenSport</string>
+    <string name="foot">FOOT</string>
+    <string name="bask">BASK</string>
+    <string name="tenn">TENN</string>
+    <string name="tabl">TABL</string>
+    <string name="voll">VOLL</string>
+    <string name="esps">ESPS</string>
+    <string name="iceh">ICEH</string>
+    <string name="hand">HAND</string>
+    <string name="bchv">BCHV</string>
+    <string name="snoo">SNOO</string>
+    <string name="badm">BADM</string>
+    <string name="expand">Expand more icon</string>
+    <string name="expand_less">Expand less icon</string>
+    <string name="profile_icon">Profile Icon</string>
+    <string name="setting_icon">Settings Icon</string>
+    <string name="fav_icon">Favourite Icon</string>
+    <string name="not_fav_icon">Not Favourite Icon</string>
+</resources>
